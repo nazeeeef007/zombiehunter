@@ -59,3 +59,46 @@ Master fluid movement, strategic weapon use, and tough combat to clear all floor
 ```bash
 git clone https://github.com/YourUsername/zombie-survival.git
 cd zombie-survival/src
+
+Install Raylib (installation guide).
+
+Add audio files (pistol_fire.wav, shotgun_fire.wav, rifle_fire.wav) inside assets/audio/ at the repo root.
+
+Compile:
+
+bash
+Copy
+Edit
+g++ main.cpp Player.cpp Zombie.cpp Weapon.cpp CollisionUtils.cpp WeaponTypes.cpp -o game.exe -lraylib -lopengl32 -lgdi32 -lwinmm
+Run:
+
+bash
+Copy
+Edit
+./game.exe
+Web (Browser)
+bash
+Copy
+Edit
+# Install Emscripten (see https://emscripten.org/docs/getting_started/downloads.html)
+cd zombie-survival/src
+emcc main.cpp Player.cpp Zombie.cpp Weapon.cpp CollisionUtils.cpp WeaponTypes.cpp -o index.html \
+    -s USE_GLFW=3 -s USE_WEBGL2=1 -s WASM=1 -s EXPORT_ES6=1 -s MODULARIZE=1 -s FORCE_FILESYSTEM=1 \
+    --preload-file ../assets@assets --embed-file ../assets/audio
+python -m http.server 8000
+Open your browser and visit: http://localhost:8000/index.html
+
+💡 Future Enhancements
+More zombie types with unique AI and attacks
+
+Additional weapons (melee, grenades)
+
+Power-ups and pickups
+
+Score and leaderboard system
+
+Environmental hazards & interactables
+
+Enhanced visual effects & animations
+
+
