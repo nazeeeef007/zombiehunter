@@ -1,121 +1,61 @@
-🧟 Zombie Survival: A C++ Raylib Adventure
-About the Game
-Zombie Survival is a fast-paced, top-down 2D shooter developed in C++ using the lightweight Raylib library. Dive into a relentless arena where you fight waves of diverse zombies across procedurally generated floors. With fluid controls, tactical weapons, and challenging combat, players experience a thrilling progression system as they battle to clear all floors and achieve victory.
+# 🧟 Zombie Survival: A C++ Raylib Adventure
 
-✨ Key Features
-Dynamic Wave-Based Combat: Face off against ever-increasing hordes of zombies with varied behaviors.
+---
 
-Procedural Map Generation: Each floor presents a unique, randomly generated layout to keep every run fresh.
+## 🎮 About the Game
 
-Multiple Weapons: Choose between Pistol, Shotgun, and Rifle — each with distinct fire rates, bullet speeds, and damage.
+*Zombie Survival* is a fast-paced, top-down 2D shooter built with C++ and Raylib.  
+Battle endless waves of zombies across procedurally generated floors in an intense arena.  
+Master fluid movement, strategic weapon use, and tough combat to clear all floors and claim victory!
 
-Player Abilities: Use a strategic dash to evade enemies and enjoy passive health regeneration when out of combat.
+---
 
-Robust Game States: Seamless transitions between weapon selection, active gameplay, game over, and victory screens.
+## ✨ Key Features
 
-Intuitive UI/HUD: Monitor your health, equipped weapon, floor progress, and zombie kills at a glance.
+- **Dynamic Wave Combat:** Face growing hordes of zombies with unique behaviors.  
+- **Procedural Maps:** Every floor has a fresh, randomly generated layout of walls.  
+- **Varied Weapons:**  
+  - *Pistol* — balanced fire rate and damage  
+  - *Shotgun* — high damage, short range  
+  - *Rifle* — rapid fire, long range  
+- **Player Abilities:** Dash for evasive maneuvers and regenerate health during lulls.  
+- **Smooth Game States:** Weapon selection, gameplay, game over, and victory screens.  
+- **Clear UI/HUD:** Shows health, weapon, floor progress, and zombie kills.  
+- **Responsive Controls:** Mouse aiming + smooth player movement.  
+- **Immersive Audio:** Unique sounds for each weapon add depth to combat.
 
-Responsive Controls: Smooth player movement with precise mouse aiming for an immersive experience.
+---
 
-Immersive Audio: Unique firing sounds for each weapon enhance the combat atmosphere.
+## 🚀 Technical Highlights
 
-🚀 Technical Overview
-Core Architecture & Technologies
-C++ & Raylib: Entire game logic and rendering are built from scratch in C++, leveraging Raylib for graphics, audio, input, and window management — demonstrating strong low-level programming skills.
+### Core Technologies  
+- **Language & Library:** C++ with [Raylib](https://www.raylib.com) for graphics, input, audio, and window management.  
+- **OOP Design:**  
+  - `Player`: handles input, state, dash, shooting  
+  - `Weapon`: encapsulates fire rate, damage, bullet speed, and sound resources  
+  - `Bullet`: manages movement, collisions, lifetime  
+  - `Zombie`: base + specialized enemy classes (e.g., `FastZombie`, `TankZombie`)  
+- **Modular Codebase:** Clean separation across header (`.h`) and source (`.cpp`) files.
 
-Object-Oriented Design:
+### Advanced C++ Concepts  
+- **Rule of Five:**  
+  - Safe management of Raylib `Sound` resources inside `Weapon` class.  
+  - Custom destructor, deleted copy constructor/assignment, and implemented move semantics prevent leaks & crashes.
 
-Player: Handles input, state, dash ability, health regen, and shooting.
+### Gameplay Mechanics  
+- Procedural wall layouts for each floor.  
+- Custom collision detection between player, zombies, bullets, and walls.
 
-Weapon: Manages weapon stats and audio resources with careful sound resource management.
+### Build & Deployment  
+- Cross-platform compilation with `g++` (Windows/Linux/macOS).  
+- WebAssembly build with Emscripten for browser play — no downloads required!
 
-Bullet: Controls projectile behavior, collision, and lifespan.
+---
 
-Zombie: Base enemy class with subclasses like FastZombie and TankZombie, showcasing polymorphism.
+## 💻 How to Run
 
-Modular Codebase: Organized into multiple .h and .cpp files (e.g., Player.h/.cpp, Weapon.h/.cpp, Zombie.h/.cpp, CollisionUtils.h/.cpp) for maintainability and scalability.
+### Native (Windows/Linux/macOS)
 
-Advanced C++ Resource Management
-Implements the Rule of Five to safely handle Raylib's Sound resources inside Weapon objects:
-
-Custom destructor calls UnloadSound()
-
-Copy constructor and copy assignment operator deleted to avoid shallow copies
-
-Move constructor and move assignment operator implemented to transfer ownership safely and prevent memory leaks or crashes
-
-Gameplay Mechanics
-Procedural Content: Generates new wall layouts per floor using procedural algorithms.
-
-Collision Detection: Custom utilities handle player-wall, bullet-zombie, and bullet-wall interactions accurately.
-
-Build & Deployment
-Cross-Platform Compilation: Uses g++ (MinGW) for Windows and supports Linux/macOS with minor flag changes.
-
-WebAssembly Deployment: Compiled to WebAssembly with Emscripten, enabling native C++ gameplay directly in modern web browsers without downloads.
-
-💻 How to Run
-Native (Windows/Linux/macOS)
-Clone the repo:
-
-bash
-Copy
-Edit
+```bash
 git clone https://github.com/YourUsername/zombie-survival.git
 cd zombie-survival/src
-Install Raylib for your OS (Raylib installation guide).
-
-Place audio files (pistol_fire.wav, shotgun_fire.wav, rifle_fire.wav) in assets/audio/ folder at the root level (parallel to src).
-
-Compile:
-
-bash
-Copy
-Edit
-g++ main.cpp Player.cpp Zombie.cpp Weapon.cpp CollisionUtils.cpp WeaponTypes.cpp -o game.exe -lraylib -lopengl32 -lgdi32 -lwinmm
-(Adjust library flags on Linux/macOS)
-
-Run:
-
-bash
-Copy
-Edit
-./game.exe
-Web (Browser)
-Install Emscripten SDK.
-
-Navigate to src:
-
-bash
-Copy
-Edit
-cd zombie-survival/src
-Compile to WebAssembly:
-
-bash
-Copy
-Edit
-emcc main.cpp Player.cpp Zombie.cpp Weapon.cpp CollisionUtils.cpp WeaponTypes.cpp -o index.html -s USE_GLFW=3 -s USE_WEBGL2=1 -s WASM=1 -s EXPORT_ES6=1 -s MODULARIZE=1 -s FORCE_FILESYSTEM=1 --preload-file ../assets@assets --embed-file ../assets/audio
-Serve locally (due to browser security restrictions):
-
-bash
-Copy
-Edit
-python -m http.server 8000
-Open your browser at http://localhost:8000/index.html.
-
-💡 Future Enhancements
-More diverse zombie types with unique AI and abilities.
-
-Additional weapons including melee and explosives.
-
-Power-ups and pickups to enrich gameplay.
-
-Score tracking and leaderboards.
-
-Environmental hazards and interactive elements.
-
-Enhanced visuals with particles and animations.
-
-Thanks for checking out Zombie Survival! Feel free to contribute or open issues for bugs and feature requests.
-
